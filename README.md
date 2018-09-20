@@ -1,5 +1,7 @@
 # vue-typescript
 
+Reworking examples from [TutorialsPoint](https://www.tutorialspoint.com/vuejs/vuejs_examples.htm "Examples page") into typescript
+
 ## Project setup
 ```
 npm install

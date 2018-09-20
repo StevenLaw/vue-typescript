@@ -84,7 +84,7 @@
 
         <h1>Table based</h1>
 
-        <div style="width:100%;">
+        <div style="width:100%;" v-if="custDet.length > 0">
             <table id="customerTable">
                 <CustomerRowComponent
                     v-for="(item, index) in custDet"
