@@ -1,6 +1,25 @@
+<style scoped>
+    .Table {
+        display: table;
+        width: 80%;
+    }
+    .Row {
+        display: table-row;
+    }
+    .Cell {
+        display: table-cell;
+        border: solid;
+        border-width: 5px;
+        padding-left: 5px;
+        padding-right: 5px;
+        width: 30%;
+    }
+</style>
+
+
 <template>
     <div class="Table">
-        <div class="Row">
+        <div class="Row" :style="styleObj">
             <div class="Cell">
                 <p>{{itr.fname}}</p>
             </div>

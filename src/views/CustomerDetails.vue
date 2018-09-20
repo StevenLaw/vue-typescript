@@ -4,57 +4,98 @@
         margin: 0 0 25px 0;
         width: auto;
     }
-    span, option, input {
+    /* span, option, input {
+        font-style: 20px;
+    } */
+    #tableContainer {
+        width: 100%;
+    }
+    #tableContainer table {
+        margin: 0 auto;
+    }
+    #tableContainer td {
         font-style: 20px;
     }
-    .Table {
-        display: table;
+    #tableContainer th {
+        font-style: 20px;
+        text-align: left;
+    }
+    #customerTable {
+        border-collapse: collapse;
         width: 80%;
-    }
-    .Title {
-        display: table-caption;;
-        text-align: center;
-        font-weight: bold;
-        font-size: larger;
-    }
-    .Heading {
-        display: table-row;
-        font-weight: bold;
-        text-align: center;
-    }
-    .Row {
-        display: table-row;
-    }
-    .Cell {
-        display: table-cell;
-        border: solid;
-        border-width: 5px;
-        padding-left: 5px;
-        padding-right: 5px;
-        width: 30%;
     }
 </style>
 
 <template>
     <div id="databinding">
         <h1>Customer Details</h1>
-        <span>First Name</span>
-        <input type="text" placeholder="Enter First Name" v-model="fname"/>
-        <span>Last Name</span>
-        <input type="text" placeholder="Enter Last Name" v-model="lname"/>
-        <span>Address</span>
-        <input type="text" placeholder="Enter Address" v-model="addr"/>
+        <div id="tableContainer">
+            <table>
+                <tr>
+                    <th>First Name</th>
+                    <td>
+                        <input type="text" placeholder="Enter First Name" v-model="fname"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Last Name</th>
+                    <td>
+                        <input type="text" placeholder="Enter Last Name" v-model="lname"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Address</th>
+                    <td>
+                        <input type="text" placeholder="Enter Address" v-model="addr"/>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        
+        <!-- <div>
+            <span>First Name</span>
+            <input type="text" placeholder="Enter First Name" v-model="fname"/>
+        </div>
+        
+        <div>
+            <span>Last Name</span>
+            <input type="text" placeholder="Enter Last Name" v-model="lname"/>
+        </div>
+
+        <div>
+            <span>Address</span>
+            <input type="text" placeholder="Enter Address" v-model="addr"/>
+        </div> -->
+
         <button @click="showData" :style="styleObj">Add</button>
         <br>
         <br>
+
+        <h1>Div based</h1>
+
         <CustomerComponent
             v-for="(item, index) in custDet"
             :item="item"
             :index="index"
             :itr="item"
-            :key="item.fname"
+            :key="index"
             @removeelement="custDet.splice(index, 1)">
         </CustomerComponent>
+
+        <h1>Table based</h1>
+
+        <div style="width:100%;">
+            <table id="customerTable">
+                <CustomerRowComponent
+                    v-for="(item, index) in custDet"
+                    :item="item"
+                    :index="index"
+                    :itr="item"
+                    :key="index"
+                    @removeelement="custDet.splice(index, 1)">
+                </CustomerRowComponent>
+            </table>
+        </div>
     </div>
 </template>
 
@@ -62,11 +103,13 @@
 import {Vue, Component, Prop, Provide} from 'vue-property-decorator';
 import Customer from '@/models/Customer';
 import CustomerComponent from '@/components/CustomerComponent.vue';
+import CustomerRowComponent from '@/components/CustomerRowComponent.vue';
 
 @Component({
     name: 'CustomerDetails',
     components: {
         CustomerComponent,
+        CustomerRowComponent,
     },
 })
 export default class CustomerDetails extends Vue {
